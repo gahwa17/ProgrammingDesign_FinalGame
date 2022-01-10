@@ -104,7 +104,7 @@ int main(void){
         switch(move){
             case 'w':
                 if(check_move(Prow-1,Pcol,maprow,mapcol) == True){
-                    // printf("Debug[%d][%d]\n", Prow-1,Pcol);
+                    printf("Debug[%d][%d]\n", Prow-1,Pcol);
 
                     if(encounter_trap(map,Prow-1,Pcol) == True){
                         printf("You have %d blood now.\n",--HP);
@@ -125,20 +125,20 @@ int main(void){
                     }
                     
                     if(encounter_village(map,Prow-1,Pcol)==True){
-                        // printf("Debug:V[%d][%d]\n", Prow-1,Pcol);
+                        printf("Debug:V[%d][%d]\n", Prow-1,Pcol);
                         village_action(ptr_HP,ptr_ACK,ptr_money);
                     }
 
                     go_up(map,Prow,Pcol);
                     Prow--;
-                    // printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
+                    printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
                 }
                 print_map(map,ptr_maprow,ptr_mapcol);
                 break;
 
             case 's':
                 if(check_move(Prow+1,Pcol,maprow,mapcol)==True){
-                    // printf("Debug[%d][%d]\n", Prow+1,Pcol);
+                    printf("Debug[%d][%d]\n", Prow+1,Pcol);
 
                     if(encounter_trap(map,Prow+1,Pcol) == True){
                         printf("You have %d blood now.\n",--HP);
@@ -164,14 +164,14 @@ int main(void){
                     
                     go_down(map,Prow,Pcol);
                     Prow++;
-                    // printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
+                    printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
                 }
                 print_map(map,ptr_maprow,ptr_mapcol);
                 break;
 
             case 'd':
                 if(check_move(Prow,Pcol+1,maprow,mapcol)==True){
-                    // printf("Debug[%d][%d]\n", Prow,Pcol+1);
+                    printf("Debug[%d][%d]\n", Prow,Pcol+1);
 
                     if(encounter_trap(map,Prow,Pcol+1) == True){
                         printf("You have %d blood now.\n",--HP);
@@ -196,14 +196,14 @@ int main(void){
                     }
                     go_right(map,Prow,Pcol);
                     Pcol++;
-                    // printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
+                    printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
                 }
                 print_map(map,ptr_maprow,ptr_mapcol);
                 break;
 
             case 'a':
                 if(check_move(Prow,Pcol-1,maprow,mapcol)==True){
-                    // printf("Debug[%d][%d]\n", Prow,Pcol-1);
+                    printf("Debug[%d][%d]\n", Prow,Pcol-1);
 
                     if(encounter_trap(map,Prow,Pcol-1) == True){
                         printf("You have %d blood now.\n",--HP);
@@ -229,7 +229,7 @@ int main(void){
                     
                     go_left(map,Prow,Pcol);
                     Pcol--;
-                    // printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
+                    printf("Debug:Aftergo[%d][%d]\n", Prow,Pcol);
                 }
                 print_map(map,ptr_maprow,ptr_mapcol);
                 break;
@@ -396,7 +396,7 @@ int check_availability(char **map,int check_row,int check_col){
 
 //玩家移動
 void go_up(char **map,int Prow,int Pcol){
-    // printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
+    printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
     //玩家離開原本的格子:若離開前發現是'I'(村莊)，則改為'v'
     if(map[Prow][Pcol] == 'I')
         map[Prow][Pcol] = 'v';
@@ -411,7 +411,7 @@ void go_up(char **map,int Prow,int Pcol){
     
 }
 void go_down(char **map,int Prow,int Pcol){
-    // printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
+    printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
     if(map[Prow][Pcol] == 'I')
         map[Prow][Pcol] = 'v';
     else
@@ -423,7 +423,7 @@ void go_down(char **map,int Prow,int Pcol){
         map[Prow+1][Pcol] = 'p';
 }
 void go_left(char **map,int Prow,int Pcol){
-    // printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
+    printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
     if(map[Prow][Pcol] == 'I')
         map[Prow][Pcol] = 'v';
     else
@@ -436,7 +436,7 @@ void go_left(char **map,int Prow,int Pcol){
     
 }
 void go_right(char **map,int Prow,int Pcol){
-    // printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
+    printf("Debug:BeforeLeave[%d][%d]:%c\n", Prow,Pcol,map[Prow][Pcol]);
     if(map[Prow][Pcol] == 'I')
         map[Prow][Pcol] = 'v';
     else
@@ -459,7 +459,7 @@ int check_move(int Prow,int Pcol,int row,int col){
 
 //傳入地圖，玩家位址，判斷是否採到陷阱，踩過的陷阱會變回'.'
 int encounter_trap(char **map,int Prow,int Pcol){
-    // printf("Debug:t[%d][%d]\n", Prow,Pcol);
+    printf("Debug:t[%d][%d]\n", Prow,Pcol);
     if(map[Prow][Pcol] == 't'){
         printf("You encounter a trap and lose 1 blood QAQ !\n");
         map[Prow][Pcol] = '.';
@@ -470,7 +470,7 @@ int encounter_trap(char **map,int Prow,int Pcol){
 }
 
 int encounter_village(char **map,int Prow,int Pcol){
-    // printf("Debug:v(in)[%d][%d]\n", Prow,Pcol);
+    printf("Debug:v(in)[%d][%d]\n", Prow,Pcol);
     if(map[Prow][Pcol] == 'v'){
         printf("Welcome to a village, Adventurer!\n");
         return True;
@@ -576,7 +576,7 @@ void village_action(int *HP,int *ACK,int *money){
 }
 
 int encounter_gun(char **map,int Prow,int Pcol){
-    // printf("Debug:g[%d][%d]\n", Prow,Pcol);
+    printf("Debug:g[%d][%d]\n", Prow,Pcol);
     if(map[Prow][Pcol] == 'g'){
         printf("You pick up a gun!, ACK+3!\n");
         return True;
@@ -586,7 +586,7 @@ int encounter_gun(char **map,int Prow,int Pcol){
 }
 
 int encounter_monster(char **map,int Prow,int Pcol){
-    // printf("Debug:m(in)[%d][%d]\n", Prow,Pcol);
+    printf("Debug:m(in)[%d][%d]\n", Prow,Pcol);
     if(map[Prow][Pcol] == 'm'){
         printf("You encounter a monster group!\n");
         return True;
@@ -655,7 +655,7 @@ int evasion(int evasionRate, int monsterLevel, int *HP){
     printf("evasionRate:%d\n", evasionRate);
     if(isLucky==True)
         evasionRate -= 20;
-    if(evasionRate > 5){
+    if(evasionRate > 50){
         *HP -= monsterLevel;
         printf("Oops,your attack miss,The monster hit back!\n");
         printf("You lose %d HP!\n",monsterLevel);
